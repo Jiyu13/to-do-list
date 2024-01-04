@@ -6,11 +6,13 @@ const getAllLists = (req, res) => {
 
 
 const getList = (req, res) => {
-    res.send("get single list")
+    res.json({id: req.params.id})
 }
 
-const createList = (req, res) => {
-    res.send("create list")
+const createList = async (req, res) => {
+    const list = await List.create(req.body)
+    console.log(req.body)
+    res.status(201).json({list})
 }
 
 const updateList = (req, res) => {
