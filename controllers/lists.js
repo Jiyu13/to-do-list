@@ -10,9 +10,15 @@ const getList = (req, res) => {
 }
 
 const createList = async (req, res) => {
-    const list = await List.create(req.body)
-    console.log(req.body)
-    res.status(201).json({list})
+    try {
+        const list = await List.create(req.body)
+        console.log(req.body)
+        res.status(201).json({list})
+
+    } catch(error) {
+        res.status(500).json({msg: error})
+    }
+
 }
 
 const updateList = (req, res) => {
