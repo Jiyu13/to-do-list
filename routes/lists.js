@@ -2,8 +2,15 @@ const express = require('express')
 const router = express.Router()
 
 
-router.route('/').get((req, res) => {
-    res.send("all lists")
-})
+const {    
+    getAllLists,
+    getList, 
+    createList,
+    updateList,
+    deleteList,
+} = require('../controllers/lists')
+
+router.route('/').get(getAllLists).post(createList)
+router.route('/:id').get(getList).patch(updateList).delete(deleteList)
 
 module.exports = router
