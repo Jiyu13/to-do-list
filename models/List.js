@@ -1,8 +1,15 @@
 const mongoose = require("mongoose")
 
 const ListSchema = new mongoose.Schema({
-    name: String,
-    completed: Boolean,    
+    name: {
+        type: String,
+        required: [true, 'Must provide a list name.'],
+        trim: true,
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    },    
 })
 
 // model needs 2 args: name, schema
