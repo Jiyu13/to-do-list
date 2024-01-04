@@ -4,6 +4,7 @@ const getAllLists = async (req, res) => {
     try {
         const allLists = await List.find({})
         res.status(200).json({lists: allLists})
+        // console.log(allLists)
     } catch(error) {
         res.status(500).json({msg: error})
     }
