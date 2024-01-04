@@ -1,7 +1,12 @@
 const List = require('../models/List')
 
-const getAllLists = (req, res) => {
-    res.send("all items")
+const getAllLists = async (req, res) => {
+    try {
+        const allLists = await List.find({})
+        res.status(200).json({lists: allLists})
+    } catch(error) {
+        res.status(500).json({msg: error})
+    }
 }
 
 
