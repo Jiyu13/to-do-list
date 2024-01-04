@@ -1,3 +1,5 @@
+const List = require('../models/List')
+
 const getAllLists = (req, res) => {
     res.send("all items")
 }
