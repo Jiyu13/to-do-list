@@ -10,8 +10,21 @@ const getAllLists = async (req, res) => {
 }
 
 
-const getList = (req, res) => {
-    res.json({id: req.params.id})
+const getList = async (req, res) => {
+    try {
+        const {id: listID} = req.params
+        const targetList = await List.findOne({_id:listID})
+        
+        if (!targetList) {
+            return res.status(404).json({msg: "No list found."})
+        }
+
+        res.status(200).json({list: targetList})
+    } catch (error) {
+        // trigger error if id syntax not correct
+        res.status(500).json({msg: error})
+    }
+    
 }
 
 const createList = async (req, res) => {
@@ -26,12 +39,40 @@ const createList = async (req, res) => {
 
 }
 
-const updateList = (req, res) => {
-    res.send("update list")
+const updateList = async (req, res) => {
+    try {
+        const {id: listID} = req.params
+        const targetList = await List.findOneAndUpdate(
+            {_id:listID}, 
+            req.body,
+            {new: true, runValidators: true},  
+            // options: return modified document & runs update validators
+        )
+        
+        if (!targetList) {
+            return res.status(404).json({msg: "No list found."})
+        }
+
+        res.status(200).json({targetList,})
+    } catch (error) {
+        // trigger error if id syntax not correct
+        res.status(500).json({msg: error})
+    }
 }
 
-const deleteList = (req, res) => {
-    res.send("delete list")
+const deleteList = async (req, res) => {
+    try {
+        const {id: listID} = req.params
+        const deleteList = await List.findOneAndDelete({_id:listID})
+        
+        if (!deleteList) {
+            return res.status(404).json({msg: "No list found."})
+        }
+
+        res.status(200).json({list: null, status: "success"})
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
 }
 
 module.exports = {
