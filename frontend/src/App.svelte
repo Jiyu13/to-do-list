@@ -30,6 +30,10 @@
 	function handleAddLists() {
 		isAddList = !isAddList
 	}
+	function handleCreateFormSubmit(event) {
+		event.preventDefault();
+	}
+
     
 	function handleAllLists() {
 		listsToShow = allLists
@@ -43,10 +47,18 @@
         listsToShow = doneLists
     }
 
+
+	function handleDelete(id) {
+		console.log("delete")
+		console.log(id)
+		axios.delete(API_URL + `api/v1/to_do_list/${id}`)
+	}
+
+
 </script>
 
 {#if isAddList}
-	<CreateListForm handleAddLists={handleAddLists}/>
+	<CreateListForm handleAddLists={handleAddLists} handleCreateFormSubmit={handleCreateFormSubmit}/>
 {/if}
 <main class="main">
 
@@ -61,7 +73,10 @@
 			
 			<div class="lists-container">
 					{#each listsToShow as list}
-						<SingleList list={list}/>
+						<SingleList 
+							list={list} 
+							handleDelete={handleDelete}
+						/>
 					{/each}
 				
 			</div>
