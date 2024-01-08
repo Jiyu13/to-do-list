@@ -1,14 +1,16 @@
 <script>
+	import {Router, Route} from 'svelte-routing'
+	import ListsAll from "./components/ListsAll.svelte"
 
+	import CreateListForm from "./components/CreateListForm.svelte"
+	import OrderSearch from "./components/OrderSearch.svelte"
+	import RightNavigation from "./components/RightNavigation.svelte"
 	import '../public/global.css';
 
 
 	import axios from "axios";
 	import { onMount } from "svelte"
-	import CreateListForm from "./components/CreateListForm.svelte"
-	import OrderSearch from "./components/OrderSearch.svelte"
-	import RightNavigation from "./components/RightNavigation.svelte"
-	import SingleList from "./components/SingleList.svelte"
+	
 
 	let API_URL="http://localhost:3000/"
 	let input=""
@@ -57,44 +59,37 @@
 
 </script>
 
-{#if isAddList}
-	<CreateListForm handleAddLists={handleAddLists} handleCreateFormSubmit={handleCreateFormSubmit}/>
-{/if}
-<main class="main">
+<div class="app">
 
+	{#if isAddList}
+		<CreateListForm 
+		handleAddLists={handleAddLists} handleCreateFormSubmit={handleCreateFormSubmit}/>
+	{/if}
 	<div class="top-container">
 		<h5 class="title">Todo List</h5>
 	</div>
 
-	<div class="middle-container">
-		<div class="left">
-			<OrderSearch />
+	<Router >
+		<div class="middle-container">
+			<div class="left" >
+				<OrderSearch />
 				
-			
-			<div class="lists-container">
-					{#each listsToShow as list}
-						<SingleList 
-							list={list} 
-							handleDelete={handleDelete}
-						/>
-					{/each}
-				
+					<Route path="/" component={ListsAll} {allLists} {handleDelete}/>
 			</div>
+
+			<RightNavigation 
+				handleAddLists={handleAddLists}
+				handleAllLists={handleAllLists}
+				handleInProgressLists={handleInProgressLists}
+				handleDoneLists={handleDoneLists}
+			/>
 		</div>
+	</Router>
 
-		<RightNavigation 
-			handleAddLists={handleAddLists}
-			handleAllLists={handleAllLists}
-			handleInProgressLists={handleInProgressLists}
-			handleDoneLists={handleDoneLists}
-		/>
-	</div>
-
-</main>
-
+</div>
 
 <style>
-	.main {
+	.app {
 		max-width: 900px;
 		margin: 50px auto;
 		display: flex;
@@ -130,13 +125,7 @@
 
 	
 
-	.lists-container {
-		display: flex;
-		gap: 12px;
-		flex-direction: column;
-		overflow-y: auto; 
-		max-height: 70vh;
-	}
+
 
 
 
