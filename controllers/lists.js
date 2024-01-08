@@ -10,7 +10,25 @@ const getAllLists = async (req, res) => {
     }
 }
 
+const getInProgressLists = async (req, res) => {
+    try {
+        const allLists = await List.find({completed: false})
+        res.status(200).json({lists: allLists})
+        // console.log(allLists)
+    } catch(error) {
+        res.status(500).json({msg: error})
+    }
+}
 
+const getCompletedLists = async (req, res) => {
+    try {
+        const allLists = await List.find({completed: true})
+        res.status(200).json({lists: allLists})
+        // console.log(allLists)
+    } catch(error) {
+        res.status(500).json({msg: error})
+    }
+}
 const getList = async (req, res) => {
     try {
         const {id: listID} = req.params
@@ -77,7 +95,7 @@ const deleteList = async (req, res) => {
 }
 
 module.exports = {
-    getAllLists,
+    getAllLists, getInProgressLists, getCompletedLists,
     getList, 
     createList,
     updateList,
