@@ -6,11 +6,9 @@
 	const CircleSrc = './icons/circle_24.svg'
 
     export let list
+	export let handleDelete
 
     function handleEdit() {}
-
-	function handleDelete() {}
-
 	function handleCheckList() {}
 </script>
 
@@ -38,7 +36,7 @@
         <button on:click={handleEdit} class="icon">
             <img src={editSrc} alt="edit icon"/>
         </button>
-        <button on:click={handleDelete} class="icon" id={list.id}>
+        <button on:click={()=>handleDelete(list._id)} class="icon">
             <img src={deleteSrc} alt="delete icon"/>
         </button>
     </div>
