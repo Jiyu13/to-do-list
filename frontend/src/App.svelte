@@ -1,6 +1,11 @@
 <script>
+
+	import '../public/global.css';
+
+
 	import axios from "axios";
 	import { onMount } from "svelte"
+	import CreateListForm from "./components/CreateListForm.svelte"
 	import OrderSearch from "./components/OrderSearch.svelte"
 	import RightNavigation from "./components/RightNavigation.svelte"
 	import SingleList from "./components/SingleList.svelte"
@@ -13,11 +18,6 @@
 	let doneLists = []
 
 	let isAddList = false
-	let isShowAll = true
-	let isShowInProgress = false
-	let isShowDone = false
-
-
 
 	onMount(async() => {
 		const {data} = await axios.get(API_URL + "api/v1/to_do_list")
@@ -27,22 +27,27 @@
 		doneLists = data["lists"].filter(l => l.completed === true)
 	})
 
-	function handleAddLists() {    }
-    function handleAllLists() {
+	function handleAddLists() {
+		isAddList = !isAddList
+	}
+    
+	function handleAllLists() {
 		listsToShow = allLists
-
-
     }
-    function handleInProgressLists() {
+    
+	function handleInProgressLists() {
 		listsToShow = inProgressLists
-
     }
-    function handleDoneLists() {
+    
+	function handleDoneLists() {
         listsToShow = doneLists
     }
 
 </script>
 
+{#if isAddList}
+	<CreateListForm handleAddLists={handleAddLists}/>
+{/if}
 <main class="main">
 
 	<div class="top-container">
@@ -118,27 +123,6 @@
 		max-height: 70vh;
 	}
 
-	
-	
-	:global(body) {
-		background-color: rgb(246, 215, 118);
-		overflow: hidden;
-		height: 100vh;
 
-	}
 
-	:global(button){
-		background: none;
-		color: inherit;
-		border: none;
-		padding: 0;
-		font: inherit;
-		cursor: pointer;
-		outline: inherit;
-		margin: 0;
-	}
-
-	:global(button:active) {
-		background-color: transparent;
-	}
 </style>
