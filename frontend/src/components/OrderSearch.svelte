@@ -59,10 +59,4 @@
     column-gap: 2px;
     margin: 8px;
 }
-.search-bar {
-    border-radius: 4px;
-    margin: 0;
-    padding: 0 0 0 0.4rem;
-    border: none;
-}
 </style>
