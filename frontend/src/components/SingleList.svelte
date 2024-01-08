@@ -7,7 +7,6 @@
 
     export let list
 
-
     function handleEdit() {}
 
 	function handleDelete() {}
@@ -30,7 +29,9 @@
             </button>
         {/if}
 
-        <div class="list-name">{list.name}</div>
+        <div class="list-name" class:completed={list.completed}>
+			{list.name}
+		</div>
     </div>
 
     <div class="icons">
@@ -75,5 +76,9 @@
 	}
     button.icon:hover {
 		transform: scale(1.1);
+	}
+
+	.completed {
+		text-decoration-line: line-through;
 	}
 </style>
