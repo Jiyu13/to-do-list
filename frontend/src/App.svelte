@@ -7,21 +7,42 @@
 
 	let API_URL="http://localhost:3000/"
 	let input=""
+	let listsToShow = []
 	let allLists = []
+	let inProgressLists = []
+	let doneLists = []
+
+	let isAddList = false
+	let isShowAll = true
+	let isShowInProgress = false
+	let isShowDone = false
 
 
 
 	onMount(async() => {
 		const {data} = await axios.get(API_URL + "api/v1/to_do_list")
-		console.log(data["lists"])
 		allLists = data["lists"]
+		listsToShow = data["lists"]
+		inProgressLists = data["lists"].filter(l => l.completed === false)
+		doneLists = data["lists"].filter(l => l.completed === true)
 	})
 
+	function handleAddLists() {    }
+    function handleAllLists() {
+		listsToShow = allLists
 
-	
-	
+
+    }
+    function handleInProgressLists() {
+		listsToShow = inProgressLists
+
+    }
+    function handleDoneLists() {
+        listsToShow = doneLists
+    }
 
 </script>
+
 <main class="main">
 
 	<div class="top-container">
@@ -34,12 +55,20 @@
 				
 			
 			<div class="lists-container">
-				{#each allLists as list}
-					<SingleList list={list}/>
-				{/each}
+					{#each listsToShow as list}
+						<SingleList list={list}/>
+					{/each}
+				
 			</div>
 		</div>
-		<RightNavigation />
+
+		<RightNavigation 
+			handleAddLists={handleAddLists}
+			handleAllLists={handleAllLists}
+			handleInProgressLists={handleInProgressLists}
+			handleDoneLists={handleDoneLists}
+		/>
+	</div>
 
 </main>
 
@@ -85,9 +114,8 @@
 		display: flex;
 		gap: 12px;
 		flex-direction: column;
-		overflow-y: scroll; 
+		overflow-y: auto; 
 		max-height: 70vh;
-		justify-content: space-evenly;
 	}
 
 	
