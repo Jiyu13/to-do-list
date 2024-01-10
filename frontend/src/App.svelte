@@ -1,6 +1,8 @@
 <script>
 	import {Router, Route} from 'svelte-routing'
 	import ListsAll from "./components/ListsAll.svelte"
+	import ListsDone from "./components/ListsDone.svelte"
+	import ListsInProgress from "./components/ListsInProgress.svelte"
 
 	import CreateListForm from "./components/CreateListForm.svelte"
 	import OrderSearch from "./components/OrderSearch.svelte"
@@ -24,10 +26,16 @@
 	onMount(async() => {
 		const {data} = await axios.get(API_URL + "api/v1/to_do_list")
 		allLists = data["lists"]
-		listsToShow = data["lists"]
-		inProgressLists = data["lists"].filter(l => l.completed === false)
-		doneLists = data["lists"].filter(l => l.completed === true)
 	})
+	onMount(async() => {
+		const {data} = await axios.get(API_URL + "api/v1/to_do_list/in-progress")
+		inProgressLists = data["lists"]
+	})
+	onMount(async() => {
+		const {data} = await axios.get(API_URL + "api/v1/to_do_list/completed")
+		doneLists = data["lists"]
+	})
+
 
 	function handleAddLists() {
 		isAddList = !isAddList
@@ -35,19 +43,6 @@
 	function handleCreateFormSubmit(event) {
 		event.preventDefault();
 	}
-
-    
-	function handleAllLists() {
-		listsToShow = allLists
-    }
-    
-	function handleInProgressLists() {
-		listsToShow = inProgressLists
-    }
-    
-	function handleDoneLists() {
-        listsToShow = doneLists
-    }
 
 
 	function handleDelete(id) {
@@ -74,15 +69,13 @@
 			<div class="left" >
 				<OrderSearch />
 				
-					<Route path="/" component={ListsAll} {allLists} {handleDelete}/>
+				<Route path="/" component={ListsAll} {allLists} {handleDelete}/>
+				<Route path="/completed" component={ListsDone} {doneLists} {handleDelete}/>
+				<Route path="/in-progress" component={ListsInProgress} {inProgressLists} {handleDelete}/>
+
 			</div>
 
-			<RightNavigation 
-				handleAddLists={handleAddLists}
-				handleAllLists={handleAllLists}
-				handleInProgressLists={handleInProgressLists}
-				handleDoneLists={handleDoneLists}
-			/>
+			<RightNavigation />
 		</div>
 	</Router>
 
