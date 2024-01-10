@@ -4,7 +4,7 @@
 
     let newListNameInput
     export let handleAddLists
-
+    export let handleCreateFormSubmit
 </script>
 
 <div class="modal-container">
@@ -17,7 +17,7 @@
             </button>
         </div>
         
-        <form class="list-form">
+        <form class="list-form" on:submit={handleCreateFormSubmit}>
             <input
                 class="list-name-input"
                 type="text"
