@@ -1,8 +1,17 @@
 <script>
-    export let doneLists
+    import axios from "axios";
+	import { onMount } from "svelte"
     export let handleDelete
 
     import SingleList from "./SingleList.svelte"
+
+    export let API_URL
+    let doneLists = []
+    onMount(async() => {
+		const {data} = await axios.get(API_URL + "api/v1/to_do_list/completed")
+		doneLists = data["lists"]
+	})
+
 
 </script>
 

@@ -16,26 +16,14 @@
 
 	let API_URL="http://localhost:3000/"
 	let input=""
-	let listsToShow = []
 	let allLists = []
-	let inProgressLists = []
-	let doneLists = []
-
 	let isAddList = false
 
 	onMount(async() => {
 		const {data} = await axios.get(API_URL + "api/v1/to_do_list")
 		allLists = data["lists"]
 	})
-	onMount(async() => {
-		const {data} = await axios.get(API_URL + "api/v1/to_do_list/in-progress")
-		inProgressLists = data["lists"]
-	})
-	onMount(async() => {
-		const {data} = await axios.get(API_URL + "api/v1/to_do_list/completed")
-		doneLists = data["lists"]
-	})
-
+	
 
 	function handleAddLists() {
 		isAddList = !isAddList
@@ -58,7 +46,9 @@
 
 	{#if isAddList}
 		<CreateListForm 
-		handleAddLists={handleAddLists} handleCreateFormSubmit={handleCreateFormSubmit}/>
+			handleAddLists={handleAddLists} 
+			handleCreateFormSubmit={handleCreateFormSubmit}
+		/>
 	{/if}
 	<div class="top-container">
 		<h5 class="title">Todo List</h5>
@@ -70,8 +60,8 @@
 				<OrderSearch />
 				
 				<Route path="/" component={ListsAll} {allLists} {handleDelete}/>
-				<Route path="/completed" component={ListsDone} {doneLists} {handleDelete}/>
-				<Route path="/in-progress" component={ListsInProgress} {inProgressLists} {handleDelete}/>
+				<Route path="/completed" component={ListsDone} {handleDelete} {API_URL}/>
+				<Route path="/in-progress" component={ListsInProgress} {handleDelete} {API_URL}/>
 
 			</div>
 

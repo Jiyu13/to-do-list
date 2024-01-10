@@ -1,8 +1,17 @@
 <script>
-    export let inProgressLists
-    export let handleDelete
-
+    import axios from "axios";
+	import { onMount } from "svelte"
     import SingleList from "./SingleList.svelte"
+
+    export let handleDelete
+    export let API_URL
+    let inProgressLists = []
+
+
+    onMount(async() => {
+		const {data} = await axios.get(API_URL + "api/v1/to_do_list/in-progress")
+		inProgressLists = data["lists"]
+	})
 
 </script>
 
