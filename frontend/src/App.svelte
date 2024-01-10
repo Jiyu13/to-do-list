@@ -75,7 +75,7 @@
 
 			</div>
 
-			<RightNavigation />
+			<RightNavigation handleAddLists={handleAddLists}/>
 		</div>
 	</Router>
 
