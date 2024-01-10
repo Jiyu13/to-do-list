@@ -16,7 +16,7 @@ const getInProgressLists = async (req, res) => {
         const InProgresLists = await List.find({completed: false})
         res.status(200).json({lists: InProgresLists})
         // console.log("======================================")
-        console.log(InProgresLists)
+        // console.log(InProgresLists)
     } catch(error) {
         res.status(500).json({msg: error})
     }
