@@ -6,39 +6,32 @@
     import inProgressSrc from '../../public/icons/in_progress_24.svg';
     import doneSrc from '../../public/icons/done_24.svg';
 
-    export let handleAddLists
-    export let handleAllLists
-    export let handleInProgressLists
-    export let handleDoneLists
-
-    
-
 </script>
 
 <nav class="right">
     <Link to="/add" >
-        <div class="nav-item" on:click={handleAddLists}>
+        <div class="nav-item">
             <img src={addSrc} alt="add list icon"/>
             Add List
         </div>
     </Link>
 
     <Link to="/" >
-        <div class="nav-item" on:click={handleAllLists}>
+        <div class="nav-item">
             <img src={listSrc} alt="all lists icon"/>
             All
         </div>
     </Link>
     
     <Link to="/in-progress" >
-        <div class="nav-item" on:click={handleInProgressLists}>
+        <div class="nav-item">
             <img src={inProgressSrc} alt="lists in progress icon"/>
             In Progress
         </div>
     </Link>
     
     <Link to="/completed" >
-        <div class="nav-item" on:click={handleDoneLists}>
+        <div class="nav-item">
             <img src={doneSrc} alt="lists done icon"/>
             Done
         </div>
