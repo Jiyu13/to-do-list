@@ -15,15 +15,7 @@
 	import { onMount } from "svelte"
 	
 	let API_URL="http://localhost:3000/"
-	let input=""
-	let allLists = []
-	let isAddList = false
-
-	onMount(async() => {
-		const {data} = await axios.get(API_URL + "api/v1/to_do_list")
-		allLists = data["lists"]
-	})
-	
+	let isAddList = false	
 
 	function handleAddLists() {
 		isAddList = !isAddList
@@ -59,9 +51,9 @@
 			<div class="left" >
 				<OrderSearch />
 				
-				<Route path="/" component={ListsAll} {allLists} {handleDelete}/>
-				<Route path="/completed" component={ListsDone} {handleDelete} {API_URL}/>
-				<Route path="/in-progress" component={ListsInProgress} {handleDelete} {API_URL}/>
+				<Route path="/" component={ListsAll} {API_URL}/>
+				<Route path="/completed" component={ListsDone} {API_URL}/>
+				<Route path="/in-progress" component={ListsInProgress} {API_URL}/>
 
 			</div>
 
