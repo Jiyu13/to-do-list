@@ -1,10 +1,26 @@
 <script>
     import CloseSrc from '../../public/icons/close_24.svg';
-
-
-    let newListNameInput
     export let handleAddLists
     export let handleCreateFormSubmit
+
+    let newListNameInput
+    let initialValue = {
+        name: "",
+        completed: false,
+    }
+
+    function handleInput(e) {
+        const name = e.target.name
+        let value 
+        if (e.target.type === "checkbox") {
+            value = e.target.checked
+        } else {
+            value = e.target.value
+        }
+        initialValue = {...initialValue, [name]: value}
+        console.log(initialValue)
+    }
+
 </script>
 
 <div class="modal-container">
@@ -22,18 +38,24 @@
                 <input
                     class="list-name-input"
                     type="text"
-                    name="'list-name"
+                    name="name"
                     bind:value={newListNameInput}
                     placeholder="List name"
+                    on:input={handleInput}
                 />
                 <div class="checkbox-div">
-                    <input type="checkbox" name="completed" id="check-completed"/>
+                    <input 
+                        type="checkbox" 
+                        name="completed"
+                        bind:checked={initialValue.completed}
+                        id="check-completed" 
+                        on:input={handleInput}
+                    />
                     <label for="check-completed" class="check-label">Completed</label>
                 </div>
                 
             </div>
-            <button class="add-list-btn">Add</button>
-
+            <input type="submit" value="Add"class="add-list-btn" />
         </form>
 
     </div>
