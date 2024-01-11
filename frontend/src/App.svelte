@@ -12,10 +12,18 @@
 
 
 	import axios from "axios";
-	import { onMount } from "svelte"
+	import { setContext, onMount } from "svelte"
 	
 	let API_URL="http://localhost:3000/"
-	let isAddList = false	
+	let isAddList = false
+	
+	let allLists = []
+	let inProgressLists = []
+	let doneLists = []
+
+	setContext("all", allLists)
+	setContext("in-progress", inProgressLists)
+	setContext("completed", doneLists)
 
 	function handleAddLists() {
 		isAddList = !isAddList
@@ -62,7 +70,6 @@
 	</Router>
 
 </div>
-
 <style>
 	.app {
 		max-width: 900px;

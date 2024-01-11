@@ -2,10 +2,10 @@
     export let API_URL
 
     import axios from "axios";
-	import { onMount } from "svelte"
+	import { getContext, onMount } from "svelte"
     import SingleList from "./SingleList.svelte"
 
-    let inProgressLists = []
+    let inProgressLists = getContext("in-progress")
 
     onMount(async() => {
 		const {data} = await axios.get(API_URL + "api/v1/to_do_list/in-progress")
