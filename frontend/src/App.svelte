@@ -1,5 +1,6 @@
 <script>
 	import {Router, Route} from 'svelte-routing'
+	Router.baseUrl = 'http://localhost:8080/'
 	import ListsAll from "./components/ListsAll.svelte"
 	import ListsDone from "./components/ListsDone.svelte"
 	import ListsInProgress from "./components/ListsInProgress.svelte"
@@ -13,7 +14,6 @@
 	import axios from "axios";
 	import { onMount } from "svelte"
 	
-
 	let API_URL="http://localhost:3000/"
 	let input=""
 	let allLists = []
