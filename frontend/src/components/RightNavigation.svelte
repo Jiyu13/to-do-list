@@ -6,12 +6,12 @@
     import inProgressSrc from '../../public/icons/in_progress_24.svg';
     import doneSrc from '../../public/icons/done_24.svg';
 
-    export let handleAddLists
+    export let handleAddList
 
 </script>
 
 <nav class="right">
-    <div class="nav-item" on:click={handleAddLists}>
+    <div class="nav-item" on:click={handleAddList}>
         <img src={addSrc} alt="add list icon"/>
         Add List
     </div>
