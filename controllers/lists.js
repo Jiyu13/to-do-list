@@ -4,7 +4,7 @@ const getAllLists = async (req, res) => {
     try {
         const allLists = await List.find({})
         res.status(200).json({lists: allLists})
-        // console.log("======================================")
+        // console.log("===========all========================")
         // console.log(allLists)
     } catch(error) {
         res.status(500).json({msg: error})
@@ -26,6 +26,7 @@ const getCompletedLists = async (req, res) => {
     try {
         const completedLists = await List.find({completed: true})
         res.status(200).json({lists: completedLists})
+        // console.log("============completed================")
         // console.log(completedLists)
     } catch(error) {
         res.status(500).json({msg: error})
