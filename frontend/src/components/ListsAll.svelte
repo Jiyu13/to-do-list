@@ -2,11 +2,10 @@
     export let API_URL
 
     import axios from "axios";
-	import { onMount } from "svelte"
+	import { getContext, onMount } from "svelte"
     import SingleList from "./SingleList.svelte"
-
-
-    let allLists = []
+    
+    let allLists = getContext("all")
 
 
     onMount(async() => {
