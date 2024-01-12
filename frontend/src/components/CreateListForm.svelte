@@ -1,12 +1,11 @@
 <script>
     import axios from "axios";
     import CloseSrc from '../../public/icons/close_24.svg';
-    import { API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+    import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
     
     export let handleAddList
 
-    let pathname = window.location.pathname;
-
+    pathname.set(window.location.pathname)
 
     let newListNameInput
     let initialValue = {
