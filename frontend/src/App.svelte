@@ -10,32 +10,17 @@
 	import RightNavigation from "./components/RightNavigation.svelte"
 	import '../public/global.css';
 
-
+	import { API_URL } from "./store.js"
 	import axios from "axios";
-	import { setContext, onMount } from "svelte"
+	import { onMount } from "svelte"
 	
-	let API_URL="http://localhost:3000/"
 	let isAddList = false
 	
-	let allLists = []
-	let inProgressLists = []
-	let doneLists = []
-
-	setContext("all", allLists)
-	setContext("in-progress", inProgressLists)
-	setContext("completed", doneLists)
-
-	function handleAddLists() {
+	function handleAddList() {
 		isAddList = !isAddList
 	}
-	function handleCreateFormSubmit(event) {
-		event.preventDefault();
-	}
-
 
 	function handleDelete(id) {
-		console.log("delete")
-		console.log(id)
 		axios.delete(API_URL + `api/v1/to_do_list/${id}`)
 	}
 
@@ -45,10 +30,7 @@
 <div class="app">
 
 	{#if isAddList}
-		<CreateListForm 
-			handleAddLists={handleAddLists} 
-			handleCreateFormSubmit={handleCreateFormSubmit}
-		/>
+		<CreateListForm handleAddList={handleAddList} />
 	{/if}
 	<div class="top-container">
 		<h5 class="title">Todo List</h5>
@@ -59,13 +41,13 @@
 			<div class="left" >
 				<OrderSearch />
 				
-				<Route path="/" component={ListsAll} {API_URL}/>
-				<Route path="/completed" component={ListsDone} {API_URL}/>
-				<Route path="/in-progress" component={ListsInProgress} {API_URL}/>
+				<Route path="/" component={ListsAll}/>
+				<Route path="/completed" component={ListsDone}/>
+				<Route path="/in-progress" component={ListsInProgress}/>
 
 			</div>
 
-			<RightNavigation handleAddLists={handleAddLists}/>
+			<RightNavigation handleAddList={handleAddList}/>
 		</div>
 	</Router>
 
