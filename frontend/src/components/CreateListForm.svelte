@@ -1,7 +1,12 @@
 <script>
+    import axios from "axios";
     import CloseSrc from '../../public/icons/close_24.svg';
-    export let handleAddLists
-    export let handleCreateFormSubmit
+    import { API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+    
+    export let handleAddList
+
+    let pathname = window.location.pathname;
+
 
     let newListNameInput
     let initialValue = {
@@ -17,9 +22,26 @@
         } else {
             value = e.target.value
         }
-        initialValue = {...initialValue, [name]: value}
-        console.log(initialValue)
+        initialValue[name] = value
     }
+
+    function handleCreateFormSubmit(event) {
+		event.preventDefault();
+        axios.post(API_URL + "api/v1/to_do_list", initialValue)
+            .then(res => {
+                if (pathname === '/completed' ) {
+                    doneLists.update((currentLists ) => [...currentLists, initialValue])
+                } else if (pathname === '/in-progress') {
+                    inProgressLists.update((currentLists ) => [...currentLists, initialValue])
+                } else {
+                    allLists.update((currentLists) => [...currentLists, initialValue])
+                } 
+            })
+            .catch(error => console.log(error))
+        
+        handleAddList()
+        newListNameInput = ""
+	}
 
 </script>
 
@@ -28,7 +50,7 @@
         <div class="pop-up-header">
             <div class="header-title">Create a List!</div>
 
-            <button class="close-btn" on:click={handleAddLists}>
+            <button class="close-btn" on:click={handleAddList}>
                 <img src={CloseSrc} alt="close button"/>
             </button>
         </div>
