@@ -1,4 +1,7 @@
 <script>
+	import axios from "axios";
+	import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+	pathname.set(window.location.pathname)
     
 	const editSrc = './icons/edit_24.svg';
 	const deleteSrc = './icons/delete_24.svg';
@@ -7,9 +10,38 @@
 
     export let list
 	export let handleDelete
+	export let handleEdit
 
-    function handleEdit() {}
-	function handleCheckList() {}
+	function onUpdateLists(targetLists, updatedList) {
+		return targetLists.map(l => {
+			if (l._id === list._id) {
+				return updatedList
+			} else {
+				return l
+			}
+		})
+	}
+    
+	function handleCheckList(isCompleted) {
+		console.log($pathname)
+		axios.patch(
+			API_URL+ 
+			`api/v1/to_do_list/${list._id}`, 
+			{completed: !isCompleted}
+		) 
+		.then(res => {
+			const newList = res.data["targetList"]
+			if ($pathname === '/completed') {
+				doneLists.update((currentLists) => currentLists.filter(l => l._id !== newList._id))
+			} else if ($pathname === '/in-progress') {
+				inProgressLists.update((currentLists) => currentLists.filter(l => l._id !== newList._id))
+			} else {
+				allLists.update((currentLists) => onUpdateLists(currentLists, newList))
+			} 
+		})
+		.catch(error => console.log(error))
+	}
+
 </script>
 
 
@@ -18,11 +50,11 @@
     <div class="list-data">
 
         {#if list.completed}
-            <button class="icon" on:click={handleCheckList}>
+            <button class="icon" on:click={handleCheckList(list.completed)}>
                 <img src={checkCircleSrc} alt="checked icon"/>
             </button>
         {:else}
-            <button class="icon" on:click={handleCheckList}>
+            <button class="icon" on:click={handleCheckList(list.completed)}>
                 <img src={CircleSrc} alt="not checked icon"/>
             </button>
         {/if}
