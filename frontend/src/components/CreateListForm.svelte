@@ -28,12 +28,13 @@
 		event.preventDefault();
         axios.post(API_URL + "api/v1/to_do_list", initialValue)
             .then(res => {
-                if (pathname === '/completed' && initialValue.completed === true) {
-                    doneLists.update((currentLists ) => [...currentLists, initialValue])
-                } else if (pathname === '/in-progress' && initialValue.completed === false) {
-                    inProgressLists.update((currentLists ) => [...currentLists, initialValue])
+                const newList = res.data["list"]
+                if (pathname === '/completed' && newList.completed === true) {
+                    doneLists.update((currentLists ) => [...currentLists, newList])
+                } else if (pathname === '/in-progress' && newList.completed === false) {
+                    inProgressLists.update((currentLists ) => [...currentLists, newList])
                 } else {
-                    allLists.update((currentLists) => [...currentLists, initialValue])
+                    allLists.update((currentLists) => [...currentLists, newList])
                 } 
             })
             .catch(error => console.log(error))
