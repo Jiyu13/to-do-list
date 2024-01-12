@@ -4,6 +4,11 @@ let allLists = writable([])
 let inProgressLists = writable([])
 let doneLists = writable([])
 let API_URL="http://localhost:3000/"
-let pathname = writable("")
+let pathname = writable(window.location.pathname)
+let isEdit = writable(false)
 
-export {allLists, inProgressLists, doneLists, API_URL, pathname}
+export {
+    allLists, inProgressLists, doneLists, 
+    API_URL, pathname,
+    isEdit
+}
