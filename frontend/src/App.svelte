@@ -20,9 +20,6 @@
 		isAddList = !isAddList
 	}
 
-	function handleDelete(id) {
-		axios.delete(API_URL + `api/v1/to_do_list/${id}`)
-	}
 
 
 </script>
