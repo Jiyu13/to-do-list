@@ -1,16 +1,21 @@
 <script>
 	import axios from "axios";
-	import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+	import { isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
     
+
+	import EditListNameForm from "./EditListNameForm.svelte"
+
 	const editSrc = './icons/edit_24.svg';
 	const deleteSrc = './icons/delete_24.svg';
 	const checkCircleSrc = './icons/check_circle_24.svg'
 	const CircleSrc = './icons/circle_24.svg'
 
     export let list
+	let isEditItemId = null
+	let newListNameInput = list.name
+
 	export let handleDelete
-	export let handleEdit
 
 	function onUpdateLists(targetLists, updatedList) {
 		return targetLists.map(l => {
@@ -41,6 +46,12 @@
 		.catch(error => console.log(error))
 	}
 
+	function handleTitleClick(id) {
+		isEditItemId = id
+		$isEdit = !$isEdit
+	}
+
+
 </script>
 
 
@@ -58,13 +69,22 @@
             </button>
         {/if}
 
-        <div class="list-name" class:completed={list.completed}>
-			{list.name}
-		</div>
+		{#if $isEdit && list._id === isEditItemId}
+			<EditListNameForm list={list}/>
+		{:else}
+			<h5 
+				class="list-name" 
+				class:completed={list.completed} 
+				on:click={handleTitleClick(list._id)}
+			>
+				{list.name}
+			</h5>
+		{/if }
+        
     </div>
 
     <div class="icons">
-        <button on:click={handleEdit} class="icon">
+        <button class="icon">
             <img src={editSrc} alt="edit icon"/>
         </button>
         <button on:click={()=>handleDelete(list._id)} class="icon">
