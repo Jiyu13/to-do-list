@@ -23,7 +23,6 @@
 	}
     
 	function handleCheckList(isCompleted) {
-		console.log($pathname)
 		axios.patch(
 			API_URL+ 
 			`api/v1/to_do_list/${list._id}`, 
