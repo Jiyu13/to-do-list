@@ -27,7 +27,7 @@
 <div class="app">
 
 	{#if isAddList}
-		<CreateListForm handleAddList={handleAddList} />
+		<CreateListForm handleAddList={handleAddList}/>
 	{/if}
 	<div class="top-container">
 		<h5 class="title">Todo List</h5>
