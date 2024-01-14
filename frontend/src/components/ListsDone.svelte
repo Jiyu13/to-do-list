@@ -19,7 +19,6 @@
 		doneLists.update(currentLists => currentLists.filter(l => l._id !== id))
     }
 
-    function handleEdit() {}
 </script>
 
 <div class="lists-container">
@@ -28,7 +27,6 @@
             <SingleList 
                 list={list} 
                 handleDelete={handleDeleteFromDone}
-                handleEdit={handleEdit}
             />
         {/each}
     {/if}
