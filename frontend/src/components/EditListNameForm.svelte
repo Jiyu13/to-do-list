@@ -13,7 +13,6 @@
     function handleInput(e) {
         const name = e.target.name
         const value = e.target.value
-        console.log(name, value)
         initialValue[name] = value
         
     }
@@ -23,7 +22,6 @@
     }
 
     function upateLists(targetArray, updatedData) {
-        console.log(targetArray, updatedData)
         return targetArray.map(a => {
             if (a._id === list._id) {
                 return updatedData
@@ -34,7 +32,7 @@
     }
 
     function handleEditNameFormSubmit(e) {
-        event.preventDefault();
+        e.preventDefault();
         axios.patch(API_URL + `api/v1/to_do_list/${list._id}`, initialValue)
             .then(res => {
                 const updatedList = res.data["targetList"]
