@@ -3,7 +3,7 @@
     import axios from "axios";
 	import { onMount } from "svelte"
     import SingleList from "./SingleList.svelte"
-    import { allLists, API_URL, searchTerm } from "../store.js"
+    import { allLists, API_URL, searchTerm, pathname } from "../store.js"
     
     let filteredLists
 
@@ -22,6 +22,13 @@
         const listTitle = l.name.toLowerCase();
         return $searchTerm === "" || listTitle.includes($searchTerm.toLowerCase());
     });
+
+    $: {
+       if ($pathname !== window.location.pathname) {
+            searchTerm.update(cur => cur = ""); // Set searchTerm to an empty string
+            pathname.set(window.location.pathname);
+       }
+   }
 </script>
 
 <div class="lists-container">
