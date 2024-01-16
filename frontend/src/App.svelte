@@ -9,10 +9,6 @@
 	import OrderSearch from "./components/OrderSearch.svelte"
 	import RightNavigation from "./components/RightNavigation.svelte"
 	import '../public/global.css';
-
-	import { API_URL } from "./store.js"
-	import axios from "axios";
-	import { onMount } from "svelte"
 	
 	let isAddList = false
 	
