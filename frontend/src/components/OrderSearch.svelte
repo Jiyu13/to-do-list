@@ -1,41 +1,15 @@
 <script>
-    import { pathname, allLists, inProgressLists, doneLists } from "../store.js";
+    import { pathname, searchTerm, allLists, inProgressLists, doneLists } from "../store.js";
 
     import listSrc from '../../public/icons/list_24.svg';
 
     let isOpen = false
-    let searchBarinput = ""
 
-    function handleFilterBySearch(targetLists) {
-        const filterResult = targetLists.filter(l => {
-            return l.name.toLowerCase().includes(searchBarinput.toLowerCase())
-        })
-        return filterResult
-    }
 
     function handleSearchChange(value) {
-		searchBarinput = value
-        if ($pathname === '/completed') {
-            if (searchBarinput === "") {
-                return doneLists
-            } else {
-                doneLists.update(currentLists => handleFilterBySearch(currentLists))
-            }
-        } else if ($pathname === '/in-progress') {
-            if (searchBarinput === "") {
-                return inProgressLists
-            } else {
-                inProgressLists.update(currentLists => handleFilterBySearch(currentLists))
-            }
-        } else {
-            console.log("all")
-            if (searchBarinput === "") {
-                return allLists
-            } else {
-                allLists.update(currentLists => handleFilterBySearch(currentLists))
-            }
-        }
+		searchTerm.set(value)
     }
+    
 </script>
     <div class="left-navbar">
 
