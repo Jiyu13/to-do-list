@@ -1,5 +1,5 @@
 <script>
-    import { pathname, searchTerm, allLists, inProgressLists, doneLists } from "../store.js";
+    import { searchTerm } from "../store.js";
 
     import listSrc from '../../public/icons/list_24.svg';
 
@@ -36,6 +36,7 @@
             class="search-bar"
             type="text"
             placeholder="search"
+            bind:value={$searchTerm}
             on:input={(e) => handleSearchChange(e.target.value)}
         />
     </div>
