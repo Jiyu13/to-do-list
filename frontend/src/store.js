@@ -8,8 +8,15 @@ let pathname = writable(window.location.pathname)
 let isEdit = writable(false)
 let searchTerm = writable("")
 
+let time = new Date()
+let year = time.getFullYear()
+let month = time.getMonth() + 1
+let date = time.getDate()
+
+let localTime = writable(`${year}-${month}-${date}`)
+
 export {
     allLists, inProgressLists, doneLists, 
     API_URL, pathname,
-    isEdit, searchTerm
+    isEdit, searchTerm, localTime
 }
