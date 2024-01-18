@@ -1,6 +1,6 @@
 <script>
 	import axios from "axios";
-	import { isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+	import { localTime, isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
     
 
@@ -9,7 +9,8 @@
 	const editSrc = './icons/edit_24.svg';
 	const deleteSrc = './icons/delete_24.svg';
 	const checkCircleSrc = './icons/check_circle_24.svg'
-	const CircleSrc = './icons/circle_24.svg'
+	const greenCircleSrc = './icons/green_circle_24.svg'
+	const redCircleSrc = './icons/red_circle_24.svg'
 
     export let list
 	let isEditItemId = null
@@ -51,6 +52,8 @@
 		$isEdit = !$isEdit
 	}
 
+	const dueDate = list.dueBy.split("T")[0]
+	let isDue = dueDate.split("-").join("") < $localTime.split("-").join("") 
 
 </script>
 
@@ -63,23 +66,31 @@
             <button class="icon" on:click={handleCheckList(list.completed)}>
                 <img src={checkCircleSrc} alt="checked icon"/>
             </button>
-        {:else}
+        {:else if list.completed === false && !isDue}
             <button class="icon" on:click={handleCheckList(list.completed)}>
-                <img src={CircleSrc} alt="not checked icon"/>
+                <img src={greenCircleSrc} alt="not checked icon"/>
             </button>
-        {/if}
-
-		{#if $isEdit && list._id === isEditItemId}
-			<EditListNameForm list={list}/>
-		{:else}
-			<h5 
-				class="list-name" 
-				class:completed={list.completed} 
-				on:click={handleTitleClick(list._id)}
-			>
-				{list.name}
-			</h5>
-		{/if }
+		{:else if list.completed === false && isDue}
+			<button class="icon" on:click={handleCheckList(list.completed)}>
+				<img src={redCircleSrc} alt="is due icon"/>
+			</button>
+		{/if}
+		
+		<div class="name-date">
+			{#if $isEdit && list._id === isEditItemId}
+				<EditListNameForm list={list}/>
+			{:else}
+				<h5 
+					class="list-name" 
+					class:completed={list.completed} 
+					on:click={handleTitleClick(list._id)}
+					on:keydown={handleTitleClick(list._id)}
+				>
+					{list.name}
+				</h5>
+			{/if }
+			<div class="due-date">Due by: {dueDate}</div>
+		</div>
         
     </div>
 
@@ -109,8 +120,13 @@
 		display: flex;
 		gap: 8px;
 	}
-
-
+	.name-date {
+		display: flex;
+		flex-direction: column;
+	}
+	.due-date{
+		font-size: 0.85rem;
+	}
 	.icons{
 		display: flex;
 		gap: 8px;
