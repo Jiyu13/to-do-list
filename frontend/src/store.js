@@ -10,7 +10,7 @@ let searchTerm = writable("")
 
 let time = new Date()
 let year = time.getFullYear()
-let month = time.getMonth() + 1
+let month = (time.getMonth() + 1).toString().padStart(2, '0');
 let date = time.getDate()
 
 let localTime = writable(`${year}-${month}-${date}`)
