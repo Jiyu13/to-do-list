@@ -2,6 +2,7 @@
     import axios from "axios";
     import CloseSrc from '../../public/icons/close_24.svg';
     import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+    import Calendar from "./Calendar.svelte";
     
     export let handleAddList
 
@@ -75,6 +76,10 @@
                     />
                     <label for="check-completed" class="check-label">Completed</label>
                 </div>
+                
+            </div>
+            <div>
+                <Calendar />
                 
             </div>
             <input type="submit" value="Add"class="add-list-btn" />
