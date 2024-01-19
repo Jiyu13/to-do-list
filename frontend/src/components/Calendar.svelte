@@ -55,7 +55,7 @@
     let selectedDate = null
     let todayFormatted = `${today.year}-${today.month+1}-${today.dayNumber}`
     const selectDate = (e) => {
-        todayFormatted = `${today.year}-${today.month+1}-${e.target.innerText}`
+        todayFormatted = `${year}-${monthIndex+1}-${e.target.innerText}`
         selectedDate = e.target.innerText
     }
     
