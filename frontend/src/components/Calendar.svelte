@@ -33,6 +33,8 @@
 
     
     const goToNextMonth = () => {
+        selectedDate = null
+
 		if (monthIndex >= 11) {
 			year += 1;
 			return monthIndex = 0;
@@ -41,6 +43,8 @@
 	}
 
     const goToPrevMonth = () => {
+        selectedDate = null
+
 		if (monthIndex <= 0) {
 			year -= 1;
 			return monthIndex = 11;
@@ -55,6 +59,10 @@
         selectedDate = e.target.innerText
     }
     
+    // import { onMount } from "svelte"
+    // onMount(() => {
+    //     console.log(year);
+    // });
 </script>
 
 <input class="date-container" bind:value={todayFormatted}/>
