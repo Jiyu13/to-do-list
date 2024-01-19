@@ -157,6 +157,7 @@ h5.list-name {
 	border-radius: 4px;
 	padding: 8px;
 	color: white;
+	cursor: pointer;
 }
 button.add-list-btn:hover {
 	background-color: rgb(100, 125, 135);
