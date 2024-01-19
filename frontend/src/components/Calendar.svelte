@@ -53,10 +53,14 @@
 		return monthIndex -= 1;
 	}
 
-
+    let todayFormatted = `${today.year}-${today.month+1}-${today.dayNumber}`
+    const selectDate = (e) => {
+        todayFormatted = `${today.year}-${today.month+1}-${e.target.innerText}`
+    }
 
 </script>
 
+<input class="date-container" bind:value={todayFormatted}/>
 <div class="calendar-container">
     <header class="calendar-header">
         <p class="calendar-current-date">{month} {year}</p>
@@ -86,6 +90,8 @@
                             monthIndex === today.month &&
                             year === today.year
                         }
+                        on:click={(e) => selectDate(e)}
+                        on:keydown={(e) => selectDate(e)}
                     >
                         {(i - firstDayIndex) + 1}
                     </li>
@@ -102,6 +108,10 @@
 </div>
 
 <style>
+.date-container{
+    margin-bottom: 0.5rem;
+    padding: 8px;
+}
 .calendar-container {
     background: #fff;
     width: 100%;
