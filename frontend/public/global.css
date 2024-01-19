@@ -113,8 +113,9 @@ input {
 	z-index: 1001;
 
 	max-width: 400px;
-	height: 25vh;
+	/* height: 25vh; */
     background-color: rgb(246, 215, 118);
+	padding-bottom: 2rem;
 }
 
 .lists-container {
