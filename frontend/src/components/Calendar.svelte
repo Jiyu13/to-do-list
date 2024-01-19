@@ -122,20 +122,20 @@ header .calendar-navigation {
 }
  
 header .calendar-navigation span {
-    height: 38px;
-    width: 38px;
+    height: 33px;
+    width: 33px;
     margin: 0 1px;
     cursor: pointer;
     text-align: center;
-    line-height: 38px;
+    line-height: 33px;
     border-radius: 50%;
     user-select: none;
     color: #aeabab;
-    font-size: 1.9rem;
+    font-size: 1.3rem;
 }
  
 .calendar-navigation span:last-child {
-    margin-right: -10px;
+    margin-right: -5px;
 }
  
 header .calendar-navigation span:hover {
@@ -165,7 +165,7 @@ header .calendar-current-date {
  
 .calendar-body li {
     width: calc(100% / 7);
-    font-size: 1.07rem;
+    font-size: 0.9rem;
     color: #414141;
 }
 
@@ -200,8 +200,8 @@ ul.calendar-dates {
     z-index: -1;
     top: 50%;
     left: 50%;
-    width: 40px;
-    height: 40px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
