@@ -1,7 +1,4 @@
 <script>
-    import { onMount } from "svelte"
-
-
     const date = new Date();
     const today = {
 		dayNumber: date.getDate(),
@@ -33,9 +30,7 @@
     $: firstDaysNextMonth = 6 - lastDayIndex
 
 
-    // onMount(() => {
-    //     console.log(firstDaysNextMonth + 7);
-    // });
+
     
     const goToNextMonth = () => {
 		if (monthIndex >= 11) {
@@ -53,11 +48,13 @@
 		return monthIndex -= 1;
 	}
 
+    let selectedDate = null
     let todayFormatted = `${today.year}-${today.month+1}-${today.dayNumber}`
     const selectDate = (e) => {
         todayFormatted = `${today.year}-${today.month+1}-${e.target.innerText}`
+        selectedDate = e.target.innerText
     }
-
+    
 </script>
 
 <input class="date-container" bind:value={todayFormatted}/>
@@ -90,6 +87,7 @@
                             monthIndex === today.month &&
                             year === today.year
                         }
+                        class:selected={(i - firstDayIndex) + 1 == selectedDate}
                         on:click={(e) => selectDate(e)}
                         on:keydown={(e) => selectDate(e)}
                     >
@@ -169,10 +167,6 @@ header .calendar-current-date {
     text-align: center;
 }
  
-/* .calendar-body .calendar-dates {
-    margin-bottom: 20px;
-} */
- 
 .calendar-body li {
     width: calc(100% / 7);
     font-size: 0.9rem;
@@ -222,5 +216,9 @@ ul.calendar-dates {
  
 .calendar-dates li:not(.active):hover::before {
     background: #e4e1e1;
+}
+.calendar-dates li:not(.active).selected::before {
+    border: 2px solid #6332c5;
+    box-sizing: border-box;
 }
 </style>
