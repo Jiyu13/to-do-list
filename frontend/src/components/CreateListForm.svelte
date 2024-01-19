@@ -44,6 +44,11 @@
         newListNameInput = ""
 	}
 
+    $: disabled = initialValue.name === "" ? true : false
+    // import { onMount } from "svelte"
+    // onMount(() => {
+    //     console.log(disabled, initialValue.name);
+    // });
 </script>
 
 <div class="modal-container">
@@ -82,7 +87,7 @@
                 <Calendar />
                 
             </div>
-            <input type="submit" value="Add"class="add-list-btn" />
+            <input type="submit" value="Add"class="add-list-btn" disabled={disabled} />
         </form>
 
     </div>
