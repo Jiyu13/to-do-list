@@ -1,5 +1,5 @@
 <script>
-    const date = new Date();
+    export let date;
     const today = {
 		dayNumber: date.getDate(),
 		month: date.getMonth(),
@@ -52,7 +52,8 @@
 		return monthIndex -= 1;
 	}
 
-    let selectedDate = null
+    export let handleInput
+    export let selectedDate
     let todayFormatted = `${today.year}-${today.month+1}-${today.dayNumber}`
     const selectDate = (e) => {
         todayFormatted = `${year}-${monthIndex+1}-${e.target.innerText}`
@@ -65,7 +66,7 @@
     // });
 </script>
 
-<input class="date-container" bind:value={todayFormatted}/>
+<input class="date-container" name="dueBy" bind:value={todayFormatted} on:input={handleInput}/>
 <div class="calendar-container">
     <header class="calendar-header">
         <p class="calendar-current-date">{month} {year}</p>
