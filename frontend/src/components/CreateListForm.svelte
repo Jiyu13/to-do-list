@@ -3,15 +3,19 @@
     import CloseSrc from '../../public/icons/close_24.svg';
     import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
     import Calendar from "./Calendar.svelte";
+    let selectedDate = null
+
     
     export let handleAddList
 
     pathname.set(window.location.pathname)
 
+    const date = new Date()
     let newListNameInput
     let initialValue = {
         name: "",
         completed: false,
+        dueBy: date
     }
 
     function handleInput(e) {
@@ -23,6 +27,7 @@
             value = e.target.value
         }
         initialValue[name] = value
+        console.log(initialValue)
     }
 
     function handleCreateFormSubmit(event) {
@@ -62,30 +67,46 @@
         </div>
         
         <form class="list-form" on:submit={handleCreateFormSubmit}>
-            <div class="input-fields">
+            <div class="input-container">
+                <label for="list-name" class="input-label">List Name:</label>
                 <input
                     class="list-name-input"
+                    id="list-name"
                     type="text"
                     name="name"
                     bind:value={newListNameInput}
-                    placeholder="List name"
+                    placeholder="What are you going to do?"
                     on:input={handleInput}
                 />
-                <div class="checkbox-div">
-                    <input 
-                        type="checkbox" 
-                        name="completed"
-                        bind:checked={initialValue.completed}
-                        id="check-completed" 
-                        on:input={handleInput}
-                    />
-                    <label for="check-completed" class="check-label">Completed</label>
-                </div>
                 
             </div>
-            <div>
-                <Calendar />
+            <div class="input-container">
+                <label for="due-by" class="input-label">Due Date:</label>
+                <input 
+                    class="date-input" 
+                    id="due-by"
+                    type="date"
+                    name="dueBy" 
+                    on:input={handleInput}
+                />
+                <!-- <Calendar 
+                    selectedDate={selectedDate} 
+                    handleInput={handleInput}
+                    date={date}
+                /> -->
                 
+            </div>
+
+            <div class="input-checkbox">
+                <label for="check-completed" class="check-label">Completed</label>
+                <input 
+                    class="checkbox-div"
+                    type="checkbox" 
+                    name="completed"
+                    bind:checked={initialValue.completed}
+                    id="check-completed" 
+                    on:input={handleInput}
+                />
             </div>
             <input type="submit" value="Add"class="add-list-btn" disabled={disabled} />
         </form>
@@ -93,3 +114,9 @@
     </div>
 
 </div>
+
+<style>
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+    }
+</style>

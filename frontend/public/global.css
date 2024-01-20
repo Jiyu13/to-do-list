@@ -135,16 +135,28 @@ input {
 	margin: 1.2rem auto 0;
 	box-sizing: border-box;
 }
-.input-fields {
-	display: flex;
+.input-container {
+	display: grid;
+	grid-template-columns: 1fr 2.5fr;
+	align-items: center;
 	justify-content: space-between;
+	width: 100%;
+}
+.input-checkbox {
+	display: flex;
+	column-gap: 16px;
+}
+.input-label {
+	white-space: nowrap;
 }
 .checkbox-div{
 	display: flex;
 	gap: 4px;
 }
-.list-name-input {
+.list-name-input,
+.date-input {
 	padding: 8px;
+	width: 100%;
 }
 h5.list-name {
 	margin: 0px;
