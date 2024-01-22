@@ -11,7 +11,6 @@
     pathname.set(window.location.pathname)
 
     let date = new Date()
-    let newListNameInput
     let initialValue = {
         name: "",
         completed: false,
@@ -48,7 +47,11 @@
             .catch(error => console.log(error))
         
         handleAddList()
-        newListNameInput = ""
+        initialValue = {
+            name: "",
+            completed: false,
+            dueBy: date
+        }
 	}
 
     $: disabled = initialValue.name === "" ? true : false
@@ -76,7 +79,7 @@
                     id="list-name"
                     type="text"
                     name="name"
-                    bind:value={newListNameInput}
+                    bind:value={initialValue.name}
                     placeholder="What are you going to do?"
                     on:input={handleInput}
                 />
@@ -89,7 +92,7 @@
                     id="due-by"
                     type="date"
                     name="dueBy"
-                    bind:value={date}
+                    bind:value={initialValue.date}
                     on:input={handleInput}
                 />
                 <!-- <Calendar 
