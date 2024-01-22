@@ -52,8 +52,18 @@
 		$isEdit = !$isEdit
 	}
 
-	const dueDate = list.dueBy.split("T")[0]
-	let isDue = dueDate.split("-").join("") < $localTime.split("-").join("") 
+	const dueDate = list.dueBy
+	let isDue = dueDate < $localTime
+	const dueLocale = new Date(dueDate).toLocaleDateString(
+		undefined, 
+		{
+		timeZone: 'UTC',
+		weekday: 'short',
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+		}
+	)
 
 </script>
 
@@ -89,7 +99,7 @@
 					{list.name}
 				</h5>
 			{/if }
-			<div class="due-date">Due by: {dueDate}</div>
+			<div class="due-date">Due by: {dueLocale}</div>
 		</div>
         
     </div>
