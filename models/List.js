@@ -9,7 +9,11 @@ const ListSchema = new mongoose.Schema({
     completed: {
         type: Boolean,
         default: false
-    },    
+    },
+    dueBy: {
+        type: mongoose.Schema.Types.Mixed,
+        default: new Date()
+    }
 })
 
 // model needs 2 args: name, schema
