@@ -49,7 +49,7 @@
     }
 </script>
 
-<form on:submit={handleEditNameFormSubmit}>
+<form on:submit={handleEditNameFormSubmit} class="edit-list-form">
     <input
         class="list-name-input"
         type="text"
@@ -62,3 +62,10 @@
     <input type="button" value="Cancel" class="add-list-btn" on:click={handleCloseEdit}>
 
 </form>
+
+<style>
+    .edit-list-form {
+        display: flex;
+        gap: 4px;
+    }
+</style>
