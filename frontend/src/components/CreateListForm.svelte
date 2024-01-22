@@ -10,7 +10,7 @@
 
     pathname.set(window.location.pathname)
 
-    const date = new Date()
+    let date = new Date()
     let newListNameInput
     let initialValue = {
         name: "",
@@ -23,11 +23,13 @@
         let value 
         if (e.target.type === "checkbox") {
             value = e.target.checked
+        } else if (e.target.type === "date") {
+            value = e.target.value
         } else {
             value = e.target.value
         }
         initialValue[name] = value
-        console.log(initialValue)
+        // console.log(initialValue)
     }
 
     function handleCreateFormSubmit(event) {
@@ -86,7 +88,8 @@
                     class="date-input" 
                     id="due-by"
                     type="date"
-                    name="dueBy" 
+                    name="dueBy"
+                    bind:value={date}
                     on:input={handleInput}
                 />
                 <!-- <Calendar 
