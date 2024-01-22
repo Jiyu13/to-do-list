@@ -69,7 +69,7 @@
 	.middle-container{
 		display: grid;
 		width: 100%;
-		grid-template-columns: 80% 20%;
+		grid-template-columns: 70% 30%;
 		justify-content: space-between;
 		box-sizing: border-box;
 	}
