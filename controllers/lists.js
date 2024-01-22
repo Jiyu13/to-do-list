@@ -51,8 +51,15 @@ const getList = async (req, res) => {
 
 const createList = async (req, res) => {
     try {
-        const list = await List.create(req.body)
-        console.log(req.body)
+        const formattedDate = new Date(req.body.dueBy)
+
+        const newData = {
+            name: req.body.name,
+            completed: req.body.completed,
+            dueBy: formattedDate
+        }
+
+        const list = await List.create(newData)
         res.status(201).json({list})
 
     } catch(error) {
