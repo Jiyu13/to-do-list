@@ -1,4 +1,6 @@
 <script>
+    import { Link } from 'svelte-routing'
+
     import {isMenuOpen} from "../store.js"
 
     import addSrc from '../../public/icons/add_24.svg';
@@ -30,22 +32,25 @@
                         <span>Add List</span>
                     </li>
                 
-                    
-                    <li class="option-item">
+                    <Link to="/" on:click={() => $isMenuOpen=false}>
+                        <li class="option-item link">
                             <img src={listSrc} alt="all lists icon"/>
                             <span>All</span>
-                    </li>
+                        </li>
+                    </Link>
                     
-                    <li class="option-item">
+                    <Link to="/in-progress" on:click={() => $isMenuOpen=false}>
+                        <li class="option-item link">
                             <img src={inProgressSrc} alt="lists in progress icon"/>
                             <span>In Progress</span>
-                    </li>
-                    
-                    <li class="option-item">
+                        </li>
+                    </Link>
+                    <Link to="/completed" on:click={() => $isMenuOpen=false}>
+                        <li class="option-item link">
                             <img src={doneSrc} alt="lists done icon"/>
                             <span>Done</span>
-                    </li>
-                    
+                        </li>
+                    </Link>
                     
                 </ul>
             {/if}
@@ -93,6 +98,9 @@
         display: flex;
         justify-content: start;
         gap: 8px;
+    }
+    .option-item.link{
+        padding: 8px;
     }
     .option-item:hover {
         background-color: rgb(255, 181, 52);
