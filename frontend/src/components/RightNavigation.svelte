@@ -11,7 +11,7 @@
 </script>
 
 <nav class="right">
-    <div class="nav-item" on:click={handleAddList}>
+    <div class="nav-item" on:click={handleAddList} on:keydown={handleAddList}>
         <img src={addSrc} alt="add list icon"/>
         Add List
     </div>
