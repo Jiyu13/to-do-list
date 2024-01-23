@@ -15,8 +15,13 @@ let date = time.getDate()
 
 let localTime = writable(`${year}-${month}-${date}`)
 
+
+let isMenuOpen =  writable(false)
+let isAddList = writable(false)
+
 export {
     allLists, inProgressLists, doneLists, 
     API_URL, pathname,
-    isEdit, searchTerm, localTime
+    isEdit, searchTerm, localTime,
+    isMenuOpen, isAddList
 }
