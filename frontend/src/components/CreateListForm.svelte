@@ -1,12 +1,11 @@
 <script>
     import axios from "axios";
     import CloseSrc from '../../public/icons/close_24.svg';
-    import { pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+    import { isAddList, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
     import Calendar from "./Calendar.svelte";
     let selectedDate = null
 
     
-    export let handleAddList
 
     pathname.set(window.location.pathname)
 
@@ -59,6 +58,10 @@
     // onMount(() => {
     //     console.log(disabled, initialValue.name);
     // });
+
+    function handleCloseAddList() {
+        $isAddList = false
+    }
 </script>
 
 <div class="modal-container">
@@ -66,7 +69,7 @@
         <div class="pop-up-header">
             <div class="header-title">Create a List!</div>
 
-            <button class="close-btn" on:click={handleAddList}>
+            <button class="close-btn" on:click={handleCloseAddList} on:keydown={handleCloseAddList}>
                 <img src={CloseSrc} alt="close button"/>
             </button>
         </div>
