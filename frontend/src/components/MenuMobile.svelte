@@ -3,7 +3,7 @@
     import {onMount} from "svelte"
     import {handleCloseModal} from "../hooks.js"
 
-    import {isMenuOpen} from "../store.js"
+    import {isMenuOpen, isOrderByOpen} from "../store.js"
 
     import addSrc from '../../public/icons/add_24.svg';
     import listSrc from '../../public/icons/list_24.svg';
@@ -15,6 +15,7 @@
 
     function handleOpenMenu() {
         $isMenuOpen = !$isMenuOpen
+        $isOrderByOpen = false
     }
 
     let menuRef
@@ -31,12 +32,12 @@
     <div position="relative" bind:this={menuRef}>
         <div class="trigger-container">
             <div class="trigger-wrapper" on:click={handleOpenMenu} on:keydown={handleOpenMenu}>
-                <img src={listSrc} alt="order by menu"/>
+                <img src={listSrc} alt="menu"/>
                 <div>Menu</div>
             </div>
 
             {#if $isMenuOpen }
-                <ul class="options-box">
+                <ul class="options-box menu">
                     <li class="option-item" on:click={handleOpenAddList} on:keydown={handleOpenAddList}>
                         <img src={addSrc} alt="add list icon"/>
                         <span>Add List</span>
@@ -71,59 +72,18 @@
 
 
 <style>
-    .trigger-container {
-        display: flex;
-        justify-content: end;
-        box-sizing: border-box;
-        /* margin: 8rem 0 0; */
-        /* gap: 12px; */
-    }
-
-    .trigger-wrapper {
-        display: flex;
-        justify-content: space-between;
-        column-gap: 2px;
-        margin: 0;
-        padding: 8px;
-    }
-
-    .options-box {
-        padding: 0;
-        margin: 0;
-        background-color: white;
-        width: 8rem;
-        list-style: none;
-        /* border: 1px solid #282c34; */
-        box-sizing: border-box;
-        position: absolute;
-        top: 215px;
-        left: 10px;
-        z-index: 1000;
-        border-radius: 4px;
-        /* padding: 8px; */
-    }
-
-    .option-item {
-        padding: 8px;
-        display: flex;
-        justify-content: start;
-        gap: 8px;
-    }
-    .option-item.link{
-        padding: 8px;
-    }
-    .option-item:hover {
-        background-color: rgb(255, 181, 52);
-        cursor: pointer;
-    }
-    .option-item:hover:first-child {
-    border-top-left-radius: 4px; /* Adjust the value as needed */
-    border-top-right-radius: 4px; /* Adjust the value as needed */
-    }
-
-    .option-item:hover:last-child {
-    border-bottom-left-radius: 4px; /* Adjust the value as needed */
-    border-bottom-right-radius: 4px; /* Adjust the value as needed */
-    }
+.options-box.menu {
+	padding: 0;
+	margin: 0;
+	background-color: white;
+	width: 8rem;
+	list-style: none;
+	box-sizing: border-box;
+	position: absolute;
+	top: 215px;
+	left: 10px;
+	z-index: 1000;
+	border-radius: 4px;
+}
 
 </style>
