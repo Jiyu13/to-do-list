@@ -1,5 +1,8 @@
 <script>
     import axios from "axios";
+    import {onMount} from "svelte"
+    import {handleCloseModal} from "../hooks.js"
+
     import CloseSrc from '../../public/icons/close_24.svg';
     import { isAddList, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
     import Calendar from "./Calendar.svelte";
@@ -62,10 +65,19 @@
     function handleCloseAddList() {
         $isAddList = false
     }
+
+
+    let addFormRef
+    onMount(() => {
+        const unsubscribe = handleCloseModal(
+            addFormRef, isAddList
+        )
+        return unsubscribe
+    })
 </script>
 
 <div class="modal-container">
-    <div class="modal-dialog">
+    <div class="modal-dialog" bind:this={addFormRef}>
         <div class="pop-up-header">
             <div class="header-title">Create a List!</div>
 
