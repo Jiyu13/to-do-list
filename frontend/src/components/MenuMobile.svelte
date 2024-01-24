@@ -1,5 +1,7 @@
 <script>
     import { Link } from 'svelte-routing'
+    import {onMount} from "svelte"
+    import {handleCloseModal} from "../hooks.js"
 
     import {isMenuOpen} from "../store.js"
 
@@ -15,10 +17,18 @@
         $isMenuOpen = !$isMenuOpen
     }
 
+    let menuRef
+    onMount(() => {
+        const unsubscribe = handleCloseModal(
+            menuRef, isMenuOpen
+        );
+
+        return unsubscribe
+    })
 </script>
 
 <ul>
-    <div position="relative">
+    <div position="relative" bind:this={menuRef}>
         <div class="trigger-container">
             <div class="trigger-wrapper" on:click={handleOpenMenu} on:keydown={handleOpenMenu}>
                 <img src={listSrc} alt="order by menu"/>
