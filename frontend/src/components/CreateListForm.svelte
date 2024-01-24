@@ -48,7 +48,7 @@
             })
             .catch(error => console.log(error))
         
-        handleAddList()
+            handleCloseAddList()
         initialValue = {
             name: "",
             completed: false,
