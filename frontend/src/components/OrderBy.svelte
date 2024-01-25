@@ -118,7 +118,7 @@
             on:keydown={handleOpenOrderBy}
         >
             <img src={sortStc} alt="order by"/>
-            <div style="white-space: nowrap">Order by</div>
+            <div style="white-space: nowrap">Sort</div>
         </div>
 
         {#if $isOrderByOpen }
