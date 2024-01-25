@@ -12,11 +12,21 @@
     }
 
     function sortByDate(targetList, orderBy, InOrder) {
+        let prevItem
+        let nextItem
         if (InOrder === "asc") {
             targetList.update(currentLists => currentLists.sort((a, b) => {
+
+                if (orderBy === "name") {
+                    prevItem = a[orderBy].toLowerCase()
+                    nextItem = b[orderBy].toLowerCase()
+                } else {
+                    prevItem = a[orderBy]
+                    nextItem = b[orderBy]
+                }
                 // console.log(a[orderBy] < $localTime, a)
                 // console.log(b[orderBy]< $localTime, b)
-                if (a[orderBy] < b[orderBy]) {
+                if (prevItem < nextItem) {
                         return -1
                     } else {
                         return 1
@@ -24,9 +34,16 @@
                 }))
         } else {
             targetList.update(currentLists => currentLists.sort((a, b) => {
+                if (orderBy === "name") {
+                    prevItem = a[orderBy].toLowerCase()
+                    nextItem = b[orderBy].toLowerCase()
+                } else {
+                    prevItem = a[orderBy]
+                    nextItem = b[orderBy]
+                }
                 // console.log(a[orderBy] < localTime, a)
                 // console.log(b[orderBy]< localTime, b)
-                if (a[orderBy] < b[orderBy]) {
+                if (prevItem < nextItem) {
                         return 1
                 } else {
                     return -1
@@ -54,22 +71,44 @@
                 // $allLists.forEach(e => console.log(e.completed, e.dueBy < $localTime))
             } 
 
-        } else  if (sortID === "date-des") {
+        } else  if (sortID === "date-desc") {
             if ($pathname === '/completed') {
-                sortByDate(doneLists, "dueBy", "des")
+                sortByDate(doneLists, "dueBy", "desc")
                 // console.log($doneLists)
             } else if ($pathname === '/in-progress') {
-                sortByDate(inProgressLists, "dueBy", "des")
+                sortByDate(inProgressLists, "dueBy", "desc")
                 // console.log($inProgressLists)
 
             } else {
-                sortByDate(allLists, "dueBy", "des")
-                console.log($allLists)
+                sortByDate(allLists, "dueBy", "desc")
+                // console.log($allLists)
             } 
 
         } else  if (sortID === "name-asc") {
+            if ($pathname === '/completed') {
+                sortByDate(doneLists, "name", "asc")
+                // console.log($doneLists)
+            } else if ($pathname === '/in-progress') {
+                sortByDate(inProgressLists, "name", "asc")
+                // console.log($inProgressLists)
 
-        } else {}
+            } else {
+                sortByDate(allLists, "name", "asc")
+                // console.log($allLists)
+            } 
+        } else {
+            if ($pathname === '/completed') {
+                sortByDate(doneLists, "name", "desc")
+                // console.log($doneLists)
+            } else if ($pathname === '/in-progress') {
+                sortByDate(inProgressLists, "name", "desc")
+                // console.log($inProgressLists)
+
+            } else {
+                sortByDate(allLists, "name", "desc")
+                // console.log($allLists)
+            } 
+        }
     }
 
     let orderByRef
@@ -104,7 +143,7 @@
                 </li>
                 <li 
                     class="option-item order-by" 
-                    id="date-des"
+                    id="date-desc"
                     on:click={handleOrderBy} 
                     on:keydown={handleOrderBy}
                 >
@@ -120,7 +159,7 @@
                 </li>
                 <li 
                     class="option-item order-by" 
-                    id="name-des"
+                    id="name-desc"
                     on:click={handleOrderBy} 
                     on:keydown={handleOrderBy}
                 >
