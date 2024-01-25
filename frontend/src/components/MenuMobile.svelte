@@ -28,8 +28,7 @@
     })
 </script>
 
-<ul>
-    <div position="relative" bind:this={menuRef}>
+    <div style="position: relative" bind:this={menuRef}>
         <div class="trigger-container">
             <div class="trigger-wrapper" on:click={handleOpenMenu} on:keydown={handleOpenMenu}>
                 <img src={listSrc} alt="menu"/>
@@ -68,7 +67,6 @@
 
         </div>
      </div>
-</ul>
 
 
 <style>
@@ -80,8 +78,8 @@
 	list-style: none;
 	box-sizing: border-box;
 	position: absolute;
-	top: 215px;
-	left: 10px;
+	top: 50px;
+	left: 0px;
 	z-index: 1000;
 	border-radius: 4px;
 }
