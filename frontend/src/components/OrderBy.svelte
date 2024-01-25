@@ -74,39 +74,29 @@
         } else  if (sortID === "date-desc") {
             if ($pathname === '/completed') {
                 sortByDate(doneLists, "dueBy", "desc")
-                // console.log($doneLists)
             } else if ($pathname === '/in-progress') {
                 sortByDate(inProgressLists, "dueBy", "desc")
-                // console.log($inProgressLists)
 
             } else {
                 sortByDate(allLists, "dueBy", "desc")
-                // console.log($allLists)
             } 
 
         } else  if (sortID === "name-asc") {
             if ($pathname === '/completed') {
                 sortByDate(doneLists, "name", "asc")
-                // console.log($doneLists)
             } else if ($pathname === '/in-progress') {
                 sortByDate(inProgressLists, "name", "asc")
-                // console.log($inProgressLists)
 
             } else {
                 sortByDate(allLists, "name", "asc")
-                // console.log($allLists)
             } 
         } else {
             if ($pathname === '/completed') {
                 sortByDate(doneLists, "name", "desc")
-                // console.log($doneLists)
             } else if ($pathname === '/in-progress') {
                 sortByDate(inProgressLists, "name", "desc")
-                // console.log($inProgressLists)
-
             } else {
                 sortByDate(allLists, "name", "desc")
-                // console.log($allLists)
             } 
         }
     }
