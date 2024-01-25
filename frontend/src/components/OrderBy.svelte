@@ -1,6 +1,9 @@
 <script>
+    import {onMount} from "svelte"
+
     import {isOrderByOpen, isMenuOpen, pathname, allLists, inProgressLists, doneLists,} from "../store.js"
     import listSrc from '../../public/icons/list_24.svg';
+    import { handleCloseModal } from "../hooks.js";
 
 
     function handleOpenOrderBy() {
@@ -68,9 +71,17 @@
 
         } else {}
     }
+
+    let orderByRef
+    onMount(() => {
+        const unsubscribe = handleCloseModal(
+            orderByRef, isOrderByOpen
+        )
+        return unsubscribe
+    })
 </script>
 
-<div position="relative">
+<div position="relative" bind:this={orderByRef}>
     <div class="trigger-container">
         <div 
             class="trigger-wrapper" 
