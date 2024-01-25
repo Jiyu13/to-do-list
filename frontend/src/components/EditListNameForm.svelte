@@ -21,7 +21,7 @@
     }
 
     function handleCloseEdit() {
-        $isEdit = !$isEdit
+        $isEdit = false
     }
 
     function upateLists(targetArray, updatedData) {
