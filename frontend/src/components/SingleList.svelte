@@ -12,11 +12,10 @@
 	const greenCircleSrc = './icons/green_circle_24.svg'
 	const redCircleSrc = './icons/red_circle_24.svg'
 
-    export let list
-	let isEditItemId = null
-	let newListNameInput = list.name
-
 	export let handleDelete
+    export let list
+	
+	let isEditItemId = null
 
 	function onUpdateLists(targetLists, updatedList) {
 		return targetLists.map(l => {
@@ -52,18 +51,19 @@
 		$isEdit = !$isEdit
 	}
 
-	const dueDate = list.dueBy
-	let isDue = dueDate < $localTime
-	const dueLocale = new Date(dueDate).toLocaleDateString(
-		undefined, 
-		{
-		timeZone: 'UTC',
-		weekday: 'short',
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric',
-		}
-	)
+	// const dueDate = list.dueBy
+	// let isDue = list.dueBy < $localTime
+	// const dueLocale = new Date(dueDate).toLocaleDateString(
+	// 	undefined, 
+	// 	{
+	// 	timeZone: 'UTC',
+	// 	weekday: 'short',
+	// 	year: 'numeric',
+	// 	month: 'short',
+	// 	day: 'numeric',
+	// 	}
+	// )
+	// console.log(dueLocale)
 
 </script>
 
@@ -76,11 +76,11 @@
             <button class="icon" on:click={handleCheckList(list.completed)}>
                 <img src={checkCircleSrc} alt="checked icon"/>
             </button>
-        {:else if list.completed === false && !isDue}
+        {:else if !list.completed && list.dueBy < $localTime === false}
             <button class="icon" on:click={handleCheckList(list.completed)}>
                 <img src={greenCircleSrc} alt="not checked icon"/>
             </button>
-		{:else if list.completed === false && isDue}
+		{:else if !list.completed && list.dueBy < $localTime}
 			<button class="icon" on:click={handleCheckList(list.completed)}>
 				<img src={redCircleSrc} alt="is due icon"/>
 			</button>
@@ -99,7 +99,8 @@
 					{list.name}
 				</h5>
 			{/if }
-			<div class="due-date">Due by: {dueLocale}</div>
+			<div class="due-date"> Due by: {list.dueBy.split("T")[0]}</div>
+			<!-- {list.completed}, {list.dueBy < $localTime}, {isDue} - -->
 		</div>
         
     </div>
