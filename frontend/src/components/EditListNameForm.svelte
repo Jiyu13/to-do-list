@@ -1,5 +1,8 @@
 <script>
 	import axios from "axios";
+    import {onMount} from "svelte"
+
+    import {handleCloseModal} from "../hooks.js"
     import { isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
 
@@ -47,9 +50,18 @@
             .catch(error => console.log(error))
         handleCloseEdit()
     }
+
+    let nameEditFormRef
+    onMount(() => {
+        const unsubscribe = handleCloseModal(
+            nameEditFormRef, isEdit
+        );
+
+        return unsubscribe
+    })
 </script>
 
-<form on:submit={handleEditNameFormSubmit} class="edit-list-form">
+<form on:submit={handleEditNameFormSubmit} class="edit-list-form" bind:this={nameEditFormRef}>
     <input
         class="list-name-input"
         type="text"
