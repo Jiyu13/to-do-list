@@ -2,7 +2,7 @@
     import {onMount} from "svelte"
 
     import {isOrderByOpen, isMenuOpen, pathname, allLists, inProgressLists, doneLists,} from "../store.js"
-    import listSrc from '../../public/icons/list_24.svg';
+    import sortStc from '../../public/icons/sort_24.svg';
     import { handleCloseModal } from "../hooks.js";
 
 
@@ -110,15 +110,15 @@
     })
 </script>
 
-<div position="relative" bind:this={orderByRef}>
+<div style="position: relative" bind:this={orderByRef}>
     <div class="trigger-container">
         <div 
             class="trigger-wrapper" 
             on:click={handleOpenOrderBy} 
             on:keydown={handleOpenOrderBy}
         >
-            <img src={listSrc} alt="order by"/>
-            <div>Order by</div>
+            <img src={sortStc} alt="order by"/>
+            <div style="white-space: nowrap">Order by</div>
         </div>
 
         {#if $isOrderByOpen }
@@ -171,8 +171,8 @@
         list-style: none;
         box-sizing: border-box;
         position: absolute;
-        top: 215px;
-        left: 100px;
+        top: 50px;
+        left: 0px;
         z-index: 1000;
         border-radius: 4px;
     }
