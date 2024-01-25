@@ -1,6 +1,6 @@
 <script>
 	import axios from "axios";
-	import { localTime, isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+	import { localTime, isEditListName, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
     
 
@@ -48,12 +48,12 @@
 
 	function handleTitleClick(id) {
 		isEditItemId = id
-		$isEdit = !$isEdit
+		$isEditListName = !$isEditListName
 	}
 
-	// set isEditItemId to null whenever isEdit is false
+	// set isEditItemId to null whenever isEditListName is false
 	$: {
-        if (!$isEdit) {
+        if (!$isEditListName) {
             isEditItemId = null;
         }
     }
@@ -94,7 +94,7 @@
 		{/if}
 		
 		<div class="name-date">
-			{#if $isEdit && list._id === isEditItemId}
+			{#if $isEditListName && list._id === isEditItemId}
 				<EditListNameForm list={list}/>
 			{:else}
 				<h5 
@@ -113,7 +113,7 @@
     </div>
 
     <div class="icons">
-        <button class="icon">
+        <button class="icon" on:click={()=>handleEdit(list._id)}>
             <img src={editSrc} alt="edit icon"/>
         </button>
         <button on:click={()=>handleDelete(list._id)} class="icon">

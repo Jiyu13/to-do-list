@@ -3,7 +3,7 @@
     import {onMount} from "svelte"
 
     import {handleCloseModal} from "../hooks.js"
-    import { isEdit, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+    import { isEditListName, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
 
     export let list
@@ -21,7 +21,7 @@
     }
 
     function handleCloseEdit() {
-        $isEdit = false
+        $isEditListName = false
     }
 
     function upateLists(targetArray, updatedData) {
@@ -54,7 +54,7 @@
     let nameEditFormRef
     onMount(() => {
         const unsubscribe = handleCloseModal(
-            nameEditFormRef, isEdit
+            nameEditFormRef, isEditListName
         );
 
         return unsubscribe
