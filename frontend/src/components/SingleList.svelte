@@ -15,7 +15,7 @@
 	export let handleDelete
     export let list
 	
-	let isEditItemId = null
+    let isEditItemId = null
 
 	function onUpdateLists(targetLists, updatedList) {
 		return targetLists.map(l => {
@@ -50,6 +50,13 @@
 		isEditItemId = id
 		$isEdit = !$isEdit
 	}
+
+	// set isEditItemId to null whenever isEdit is false
+	$: {
+        if (!$isEdit) {
+            isEditItemId = null;
+        }
+    }
 
 	// const dueDate = list.dueBy
 	// let isDue = list.dueBy < $localTime
