@@ -3,12 +3,13 @@
 	import {Router, Route} from 'svelte-routing'
 	Router.baseUrl = 'http://localhost:8080/'
 
-	import {isMenuOpen, isAddList} from "./store.js"
+	import {isMenuOpen, isAddList, isEditFormOpen} from "./store.js"
 
 	import ListsAll from "./components/ListsAll.svelte"
 	import ListsDone from "./components/ListsDone.svelte"
 	import ListsInProgress from "./components/ListsInProgress.svelte"
 
+	import EditListForm from './components/EditListForm.svelte'
 	import CreateListForm from "./components/CreateListForm.svelte"
 	import NavBar from "./components/NavBar.svelte"
 	import RightNavigation from "./components/RightNavigation.svelte"
@@ -41,8 +42,12 @@
 <div class="app">
 	<!-- handleOpenAddList={handleOpenAddList}  -->
 
+	{#if $isEditFormOpen}
+		<EditListForm />
+	{/if}
+
 	{#if $isAddList}
-		<CreateListForm/>
+		<CreateListForm />
 	{/if}
 	<div class="top-container">
 		<h5 class="title">Todo List</h5>
