@@ -16,6 +16,8 @@ let time = new Date()
 
 let localTime = writable(new Date(time.getTime() - (time.getTimezoneOffset() * 60000)).toISOString())
 
+let editListID = writable(null)
+let isEditFormOpen = writable(false)
 let isOrderByOpen = writable(false)
 let isMenuOpen =  writable(false)
 let isAddList = writable(false)
@@ -24,5 +26,6 @@ export {
     allLists, inProgressLists, doneLists, 
     API_URL, pathname,
     isEditListName, searchTerm, localTime,
-    isOrderByOpen, isMenuOpen, isAddList
+    isOrderByOpen, isMenuOpen, isAddList, isEditFormOpen,
+    editListID
 }
