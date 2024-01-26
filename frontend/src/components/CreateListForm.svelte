@@ -16,8 +16,9 @@
     let initialValue = {
         name: "",
         completed: false,
-        dueBy: date
+        dueBy: new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString()
     }
+    console.log(initialValue)
 
     function handleInput(e) {
         const name = e.target.name
@@ -52,7 +53,7 @@
         initialValue = {
             name: "",
             completed: false,
-            dueBy: date
+            dueBy: new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString()
         }
 	}
 
@@ -107,7 +108,7 @@
                     id="due-by"
                     type="date"
                     name="dueBy"
-                    bind:value={initialValue.date}
+                    value={initialValue.dueBy.split("T")[0]}
                     on:input={handleInput}
                 />
                 <!-- <Calendar 
