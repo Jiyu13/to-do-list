@@ -136,8 +136,4 @@
 
 </div>
 
-<style>
-
-    input[type="date"]::-webkit-calendar-picker-indicator {
-    }
-</style>
+<style></style>
