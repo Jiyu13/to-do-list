@@ -58,9 +58,9 @@
 			<div class="left" >
 				<NavBar isMobile={isMobile} handleOpenAddList={handleOpenAddList}/>
 				
-				<Route path="/" component={ListsAll}/>
 				<Route path="/completed" component={ListsDone}/>
 				<Route path="/in-progress" component={ListsInProgress}/>
+				<Route path="/" component={ListsAll}/>
 
 			</div>
 			
