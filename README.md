@@ -1,6 +1,6 @@
 # To-do List App
 
-A simple app built in **Express.js** for backend APIs, **Svelete** for frontend, **MongoDB Atlas** for database.
+A simple app built in **__Express.js__** for backend APIs, **__Svelete__** for frontend, **__MongoDB Atlas__** for database.
 
 ## Users can:
 - Add new task.
@@ -12,6 +12,6 @@ A simple app built in **Express.js** for backend APIs, **Svelete** for frontend,
 - Check all / in progress / completed tasks in the corresponding pages.
 
 ## Tasks:
-- Green Circle with checked represents that task is completed.
+- Green Circle with checked sign represents that task is completed.
 - Red Circle represents that task in progress and is due.
 - Only Green Circle represents that task is in progress and is not due.
