@@ -12,3 +12,12 @@ export function handleCloseModal(ref, state) {
     };
 }
 
+export function upateLists(targetArray, updatedData) {
+    return targetArray.map(a => {
+        if (a._id === updatedData._id) {
+            return updatedData
+        } else {
+            return a
+        }
+    })
+}
