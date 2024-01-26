@@ -2,7 +2,7 @@
 	import axios from "axios";
     import {onMount} from "svelte"
 
-    import {handleCloseModal} from "../hooks.js"
+    import {handleCloseModal, upateLists} from "../hooks.js"
     import { isEditListName, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
 	pathname.set(window.location.pathname)
 
@@ -24,15 +24,15 @@
         $isEditListName = false
     }
 
-    function upateLists(targetArray, updatedData) {
-        return targetArray.map(a => {
-            if (a._id === list._id) {
-                return updatedData
-            } else {
-                return a
-            }
-        })
-    }
+    // export function upateLists(targetArray, updatedData) {
+    //     return targetArray.map(a => {
+    //         if (a._id === list._id) {
+    //             return updatedData
+    //         } else {
+    //             return a
+    //         }
+    //     })
+    // }
 
     function handleEditNameFormSubmit(e) {
         e.preventDefault();
