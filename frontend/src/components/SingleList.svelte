@@ -1,6 +1,7 @@
 <script>
 	import axios from "axios";
-	import { localTime, isEditListName, pathname, API_URL, allLists, inProgressLists, doneLists } from "../store.js";
+	import { localTime, isEditListName, pathname, API_URL, allLists, 
+			inProgressLists, doneLists, isEditFormOpen, editListID } from "../store.js";
 	pathname.set(window.location.pathname)
     
 
@@ -58,6 +59,11 @@
         }
     }
 
+
+	function handleEditFormOpen(id) {
+		$isEditFormOpen = true
+		$editListID = id
+	}
 	// const dueDate = list.dueBy
 	// let isDue = list.dueBy < $localTime
 	// const dueLocale = new Date(dueDate).toLocaleDateString(
@@ -113,7 +119,7 @@
     </div>
 
     <div class="icons">
-        <button class="icon" on:click={()=>handleEdit(list._id)}>
+        <button class="icon" on:click={()=>handleEditFormOpen(list._id)}>
             <img src={editSrc} alt="edit icon"/>
         </button>
         <button on:click={()=>handleDelete(list._id)} class="icon">
