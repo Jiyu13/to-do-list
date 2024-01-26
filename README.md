@@ -1,6 +1,6 @@
 # To-do List App
 
-A simple app built in **__Express.js__** for backend APIs, **__Svelete__** for frontend, **__MongoDB Atlas__** for database.
+A simple app built in **_Express.js_** for backend APIs, **_Svelete_** for frontend, **_MongoDB Atlas_** for database.
 
 ## Users can:
 - Add new task.
