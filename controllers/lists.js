@@ -89,6 +89,29 @@ const updateList = async (req, res) => {
     }
 }
 
+const updateWholeList = async (req, res) => {
+    console.log(req.body)
+    try {
+        const {id: listID} = req.params
+        const targetList = await List.findOneAndUpdate(
+            {_id:listID}, 
+            req.body,
+            {new: true, runValidators: true},  
+            // options: return modified document & runs update validators
+        )
+        
+        if (!targetList) {
+            return res.status(404).json({msg: "No list found."})
+        }
+
+        res.status(200).json({targetList,})
+    } catch (error) {
+        console.log(error)
+        // trigger error if id syntax not correct
+        res.status(500).json({msg: error})
+    }
+}
+
 const deleteList = async (req, res) => {
     try {
         const {id: listID} = req.params
@@ -108,6 +131,6 @@ module.exports = {
     getAllLists, getInProgressLists, getCompletedLists,
     getList, 
     createList,
-    updateList,
+    updateList, updateWholeList,
     deleteList,
 }
