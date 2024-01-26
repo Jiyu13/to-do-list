@@ -1,7 +1,7 @@
 <script>
 	import { onDestroy } from 'svelte'
 	import {Router, Route} from 'svelte-routing'
-	Router.baseUrl = 'http://localhost:8080/'
+	Router.baseUrl = 'http://127.0.0.1:8080/'
 
 	import {isMenuOpen, isAddList, isEditFormOpen} from "./store.js"
 
