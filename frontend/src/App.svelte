@@ -40,7 +40,6 @@
 </script>
 
 <div class="app">
-	<!-- handleOpenAddList={handleOpenAddList}  -->
 
 	{#if $isEditFormOpen}
 		<EditListForm />
@@ -92,13 +91,6 @@
 		color: rgb(109, 164, 170);
 		margin: 0 0 3rem 0;
 	}
-	/* .middle-container{
-		display: grid;
-		width: 100%;
-		grid-template-columns: 70% 30%;
-		justify-content: space-between;
-		box-sizing: border-box;
-	} */
 
 	.left {
 		display: flex;
